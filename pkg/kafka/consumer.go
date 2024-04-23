@@ -8,7 +8,7 @@ import (
 	apmkafkago "github.com/sohaibomr/apm-kafkago"
 )
 
-func (c *Reader) Receive(r pkg.ReadMessage, handleMessage func(messages, topics string)) {
+func (c *Reader) Receive(r *pkg.ReadMessage, handleMessage func(messages, topics string)) {
 	// Consumer
 	kReader := kafka.NewReader(kafka.ReaderConfig{
 		Brokers: c.Brokers,
