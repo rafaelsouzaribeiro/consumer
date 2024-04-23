@@ -2,6 +2,7 @@ package kafka
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/rafaelsouzaribeiro/consumer/pkg"
 	"github.com/segmentio/kafka-go"
@@ -20,8 +21,10 @@ func (c *Reader) Receive(r *pkg.ReadMessage, handleMessage func(messages, topics
 
 	for {
 		msg, err := reader.ReadMessage(context.Background())
+
 		if err != nil {
-			panic(err)
+			fmt.Println("Error reading message:", err)
+			continue
 		}
 
 		handleMessage(string(msg.Value), msg.Topic)
