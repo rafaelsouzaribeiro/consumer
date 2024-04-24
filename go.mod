@@ -1,10 +1,10 @@
 module github.com/rafaelsouzaribeiro/consumer
 
-go 1.21.4
+go 1.22.0
 
 require (
+	github.com/rafaelsouzaribeiro/apm-kafkago v1.0.0
 	github.com/segmentio/kafka-go v0.4.47
-	github.com/sohaibomr/apm-kafkago v1.0.0
 )
 
 require (
@@ -19,8 +19,8 @@ require (
 	github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2 // indirect
 	github.com/prometheus/procfs v0.0.0-20190425082905-87a4384529e0 // indirect
 	github.com/stretchr/testify v1.9.0 // indirect
-	go.elastic.co/apm/module/apmhttp/v2 v2.4.3 // indirect
-	go.elastic.co/apm/v2 v2.4.3 // indirect
+	go.elastic.co/apm/module/apmhttp/v2 v2.6.0 // indirect
+	go.elastic.co/apm/v2 v2.6.0 // indirect
 	go.elastic.co/fastjson v1.1.0 // indirect
 	golang.org/x/net v0.22.0 // indirect
 	golang.org/x/sys v0.18.0 // indirect

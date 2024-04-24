@@ -4,9 +4,9 @@ import (
 	"context"
 	"fmt"
 
+	apmkafkago "github.com/rafaelsouzaribeiro/apm-kafkago/pkg"
 	"github.com/rafaelsouzaribeiro/consumer/pkg"
 	"github.com/segmentio/kafka-go"
-	apmkafkago "github.com/sohaibomr/apm-kafkago"
 )
 
 func (c *Reader) Receive(r *pkg.ReadMessage, handleMessage func(messages, topics string)) {
