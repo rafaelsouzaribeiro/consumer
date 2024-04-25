@@ -1,23 +1,31 @@
 package main
 
 import (
+	"fmt"
+
 	"github.com/rafaelsouzaribeiro/consumer/pkg"
-	"github.com/rafaelsouzaribeiro/consumer/pkg/kafka"
+	exec "github.com/rafaelsouzaribeiro/consumer/pkg/kafka"
+	"github.com/segmentio/kafka-go"
 )
 
 func main() {
-	exec := kafka.NewReader([]string{"springboot:9092"})
+	consumer := exec.NewReader([]string{"springboot:9092"})
 	msg := pkg.ReadMessage{
 		Topic:   "contact-adm-insert",
 		GroupID: "contact",
 	}
-	go exec.Receive(&msg, handleMessage)
+	go consumer.Receive(&msg, handleMessage)
 
 	select {}
 }
 
-func handleMessage(messages, topics string) {
+func handleMessage(msg kafka.Message) {
 
-	println(topics, messages)
+	fmt.Printf("topic: %s, Message: %s, Partition: %d, Key: %d\n", msg.Topic, msg.Value, msg.Partition, msg.Key)
+
+	println("Headers:")
+	for _, header := range msg.Headers {
+		fmt.Printf("Key: %s, Value: %s\n", header.Key, header.Value)
+	}
 
 }

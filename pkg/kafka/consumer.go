@@ -9,7 +9,7 @@ import (
 	"github.com/segmentio/kafka-go"
 )
 
-func (c *Reader) Receive(r *pkg.ReadMessage, handleMessage func(messages, topics string)) {
+func (c *Reader) Receive(r *pkg.ReadMessage, handleMessage func(ms kafka.Message)) {
 	// Consumer
 	kReader := kafka.NewReader(kafka.ReaderConfig{
 		Brokers: c.Brokers,
@@ -27,7 +27,7 @@ func (c *Reader) Receive(r *pkg.ReadMessage, handleMessage func(messages, topics
 			continue
 		}
 
-		handleMessage(string(msg.Value), msg.Topic)
+		handleMessage(msg)
 
 		reader.R.CommitMessages(context.Background())
 	}
