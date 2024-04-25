@@ -5,7 +5,6 @@ import (
 
 	"github.com/rafaelsouzaribeiro/consumer/pkg"
 	exec "github.com/rafaelsouzaribeiro/consumer/pkg/kafka"
-	"github.com/segmentio/kafka-go"
 )
 
 func main() {
@@ -19,7 +18,7 @@ func main() {
 	select {}
 }
 
-func handleMessage(msg kafka.Message) {
+func handleMessage(msg pkg.ReadMessage) {
 
 	fmt.Printf("topic: %s, Message: %s, Partition: %d, Key: %d\n", msg.Topic, msg.Value, msg.Partition, msg.Key)
 
