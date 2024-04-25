@@ -10,6 +10,7 @@ func (c *Reader) UpdateKafkaMessage(rm *pkg.ReadMessage, msg *kafka.Message) pkg
 	rm.Topic = msg.Topic
 	rm.Partition = msg.Partition
 	rm.Key = msg.Key
+	rm.Time = msg.Time
 
 	var headers []pkg.Header
 	for _, header := range msg.Headers {

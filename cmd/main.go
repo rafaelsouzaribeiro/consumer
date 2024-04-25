@@ -20,7 +20,7 @@ func main() {
 
 func handleMessage(msg *pkg.ReadMessage) {
 
-	fmt.Printf("topic: %s, Message: %s, Partition: %d, Key: %d\n", msg.Topic, msg.Value, msg.Partition, msg.Key)
+	fmt.Printf("topic: %s, Message: %s, Partition: %d, Key: %d, time: %s\n", msg.Topic, msg.Value, msg.Partition, msg.Key, msg.Time.Format("2006-01-02 15:04:05"))
 
 	println("Headers:")
 	for _, header := range msg.Headers {

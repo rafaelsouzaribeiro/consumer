@@ -1,5 +1,7 @@
 package pkg
 
+import "time"
+
 type ReadMessage struct {
 	Topic     string
 	GroupID   string
@@ -7,6 +9,7 @@ type ReadMessage struct {
 	Partition int
 	Key       []byte
 	Headers   []Header
+	Time      time.Time
 }
 
 type Header struct {
