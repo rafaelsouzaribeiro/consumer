@@ -18,7 +18,7 @@ func main() {
 	select {}
 }
 
-func handleMessage(msg pkg.ReadMessage) {
+func handleMessage(msg *pkg.ReadMessage) {
 
 	fmt.Printf("topic: %s, Message: %s, Partition: %d, Key: %d\n", msg.Topic, msg.Value, msg.Partition, msg.Key)
 

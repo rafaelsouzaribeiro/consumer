@@ -5,7 +5,7 @@ import (
 	"github.com/segmentio/kafka-go"
 )
 
-func (c *Reader) UpdateKafkaMessage(rm *pkg.ReadMessage, msg kafka.Message) pkg.ReadMessage {
+func (c *Reader) UpdateKafkaMessage(rm *pkg.ReadMessage, msg *kafka.Message) pkg.ReadMessage {
 	rm.Value = string(msg.Value)
 	rm.Topic = msg.Topic
 	rm.Partition = msg.Partition
