@@ -19,6 +19,9 @@ func (c *Reader) Receive(r *pkg.ReadMessage, handleMessage func(ms *pkg.ReadMess
 
 	reader := apmkafkago.WrapReader(kReader)
 
+	const batchSize = 10
+	var messagesToCommit []kafka.Message
+
 	for {
 		msg, err := reader.ReadMessage(context.Background())
 
@@ -31,6 +34,16 @@ func (c *Reader) Receive(r *pkg.ReadMessage, handleMessage func(ms *pkg.ReadMess
 
 		handleMessage(&co)
 
-		reader.R.CommitMessages(context.Background())
+		messagesToCommit = append(messagesToCommit, msg)
+
+		if len(messagesToCommit) >= batchSize {
+			err = reader.R.CommitMessages(context.Background(), messagesToCommit...)
+
+			if err != nil {
+				fmt.Println("Error committing messages:", err)
+			}
+
+			messagesToCommit = nil
+		}
 	}
 }
