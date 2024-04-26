@@ -10,7 +10,7 @@ import (
 func main() {
 	consumer := exec.NewReader([]string{"springboot:9092"})
 	msg := pkg.ReadMessage{
-		Topic:   "contact-adm-isert",
+		Topic:   "contact-adm-insert",
 		GroupID: "contacts",
 	}
 	go consumer.Receive(&msg, handleMessage)
