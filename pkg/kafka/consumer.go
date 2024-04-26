@@ -13,7 +13,7 @@ func (c *Reader) Receive(r *pkg.ReadMessage, handleMessage func(ms *pkg.ReadMess
 	// Consumer
 	kReader := kafka.NewReader(kafka.ReaderConfig{
 		Brokers: c.Brokers,
-		Topic:   r.Topic,
+		Topic:   r.Topic[0],
 		GroupID: r.GroupID,
 	})
 

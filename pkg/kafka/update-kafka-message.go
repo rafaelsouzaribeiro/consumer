@@ -7,7 +7,7 @@ import (
 
 func (c *Reader) UpdateKafkaMessage(rm *pkg.ReadMessage, msg *kafka.Message) pkg.ReadMessage {
 	rm.Value = string(msg.Value)
-	rm.Topic = msg.Topic
+	rm.Topic = []string{msg.Topic}
 	rm.Partition = msg.Partition
 	rm.Key = msg.Key
 	rm.Time = msg.Time
