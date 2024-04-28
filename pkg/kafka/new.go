@@ -4,7 +4,7 @@ type Reader struct {
 	Brokers []string
 }
 
-func NewReader(brokers []string) *Reader {
+func NewBrokers(brokers []string) *Reader {
 
 	return &Reader{
 		Brokers: brokers,

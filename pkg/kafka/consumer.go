@@ -9,8 +9,7 @@ import (
 	"github.com/segmentio/kafka-go"
 )
 
-func (c *Reader) Receive(r *pkg.ReadMessage, handleMessage func(ms *pkg.ReadMessage)) {
-	// Consumer
+func (c *Reader) Receive(r *pkg.ReadMessage, canal chan<- pkg.ReadMessage) {
 	kReader := kafka.NewReader(kafka.ReaderConfig{
 		Brokers: c.Brokers,
 		Topic:   r.Topic[0],
@@ -30,9 +29,15 @@ func (c *Reader) Receive(r *pkg.ReadMessage, handleMessage func(ms *pkg.ReadMess
 			continue
 		}
 
-		co := c.UpdateKafkaMessage(r, &msg)
-
-		handleMessage(&co)
+		canal <- pkg.ReadMessage{
+			Topic:     []string{msg.Topic},
+			Value:     string(msg.Value),
+			Partition: msg.Partition,
+			Key:       msg.Key,
+			Time:      msg.Time,
+			GroupID:   r.GroupID,
+			Headers:   *getHeader(msg),
+		}
 
 		messagesToCommit = append(messagesToCommit, msg)
 
@@ -46,4 +51,16 @@ func (c *Reader) Receive(r *pkg.ReadMessage, handleMessage func(ms *pkg.ReadMess
 			messagesToCommit = nil
 		}
 	}
+}
+
+func getHeader(msg kafka.Message) *[]pkg.Header {
+	var headers []pkg.Header
+	for _, header := range msg.Headers {
+		headers = append(headers, pkg.Header{
+			Key:   header.Key,
+			Value: string(header.Value),
+		})
+	}
+
+	return &headers
 }
