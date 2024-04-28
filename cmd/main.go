@@ -10,7 +10,8 @@ import (
 func main() {
 	consumer := exec.NewBrokers([]string{"springboot:9092"})
 	msg := pkg.ReadMessage{
-		Topic:     []string{"contact-adm-insert"},
+		Topic: []string{"contact-adm-insert"},
+		//remove the group to listen to only one partition of the topic
 		GroupID:   "contacts",
 		Partition: 0,
 	}
