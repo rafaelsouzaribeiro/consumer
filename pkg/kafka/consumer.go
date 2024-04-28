@@ -11,9 +11,10 @@ import (
 
 func (c *Reader) Receive(r *pkg.ReadMessage, canal chan<- pkg.ReadMessage) {
 	kReader := kafka.NewReader(kafka.ReaderConfig{
-		Brokers: c.Brokers,
-		Topic:   r.Topic[0],
-		GroupID: r.GroupID,
+		Brokers:   c.Brokers,
+		Topic:     r.Topic[0],
+		GroupID:   r.GroupID,
+		Partition: r.Partition,
 	})
 
 	reader := apmkafkago.WrapReader(kReader)

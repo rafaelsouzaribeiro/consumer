@@ -10,8 +10,9 @@ import (
 func main() {
 	consumer := exec.NewBrokers([]string{"springboot:9092"})
 	msg := pkg.ReadMessage{
-		Topic:   []string{"contact-adm-insert"},
-		GroupID: "contacts",
+		Topic:     []string{"contact-adm-insert"},
+		GroupID:   "contacts",
+		Partition: 0,
 	}
 
 	canal := make(chan pkg.ReadMessage)
