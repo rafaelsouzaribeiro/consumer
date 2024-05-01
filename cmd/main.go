@@ -12,7 +12,8 @@ func main() {
 	msg := pkg.ReadMessage{
 		Topic: []string{"contact-adm-insert"},
 		//remove the group to listen to only one partition of the topic
-		GroupID:   "contacts",
+		GroupID: "contacts",
+		//to set GroupID set the partition to 0
 		Partition: 0,
 	}
 
