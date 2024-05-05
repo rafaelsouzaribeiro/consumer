@@ -3,7 +3,7 @@ package pkg
 import "time"
 
 type ReadMessage struct {
-	Topic     []string
+	Topic     string
 	GroupID   string
 	Value     string
 	Partition int

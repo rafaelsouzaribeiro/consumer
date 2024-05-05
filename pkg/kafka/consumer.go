@@ -12,7 +12,7 @@ import (
 func (c *Reader) Receive(r *pkg.ReadMessage, canal chan<- pkg.ReadMessage) {
 	k := kafka.ReaderConfig{
 		Brokers:   c.Brokers,
-		Topic:     r.Topic[0],
+		Topic:     r.Topic,
 		Partition: r.Partition,
 	}
 
@@ -36,7 +36,7 @@ func (c *Reader) Receive(r *pkg.ReadMessage, canal chan<- pkg.ReadMessage) {
 		}
 
 		canal <- pkg.ReadMessage{
-			Topic:     []string{msg.Topic},
+			Topic:     msg.Topic,
 			Value:     string(msg.Value),
 			Partition: msg.Partition,
 			Key:       msg.Key,
