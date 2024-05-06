@@ -21,7 +21,7 @@ func main() {
 	go consumer.Receive(&msg, canal)
 
 	for obj := range canal {
-		fmt.Printf("topic: %s, GroupID: %s, Message: %s, Partition: %d, Key: %d, time: %s\n", obj.Topic, obj.GroupID, obj.Value, obj.Partition, obj.Key, obj.Time.Format("2006-01-02 15:04:05"))
+		fmt.Printf("topic: %s, GroupID: %s, Message: %s, Partition: %d, Key: %s, time: %s\n", obj.Topic, obj.GroupID, obj.Value, obj.Partition, obj.Key, obj.Time.Format("2006-01-02 15:04:05"))
 
 		println("Headers:")
 		for _, header := range obj.Headers {
