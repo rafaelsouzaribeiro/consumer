@@ -8,7 +8,7 @@ type ReadMessage struct {
 	Value     string
 	Partition int
 	Key       []byte
-	Headers   []Header
+	Headers   *[]Header
 	Time      time.Time
 }
 

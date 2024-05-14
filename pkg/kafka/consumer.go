@@ -42,7 +42,7 @@ func (c *Reader) Receive(r *pkg.ReadMessage, canal chan<- pkg.ReadMessage) {
 			Key:       msg.Key,
 			Time:      msg.Time,
 			GroupID:   r.GroupID,
-			Headers:   *getHeader(msg),
+			Headers:   getHeader(&msg),
 		}
 
 		messagesToCommit = append(messagesToCommit, msg)
@@ -59,7 +59,7 @@ func (c *Reader) Receive(r *pkg.ReadMessage, canal chan<- pkg.ReadMessage) {
 	}
 }
 
-func getHeader(msg kafka.Message) *[]pkg.Header {
+func getHeader(msg *kafka.Message) *[]pkg.Header {
 	var headers []pkg.Header
 	for _, header := range msg.Headers {
 		headers = append(headers, pkg.Header{
