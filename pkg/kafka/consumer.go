@@ -12,12 +12,17 @@ import (
 func (c *Reader) Receive(r *pkg.ReadMessage, canal chan<- pkg.ReadMessage) {
 	k := kafka.ReaderConfig{
 		Brokers:   c.Brokers,
-		Topic:     r.Topic,
 		Partition: r.Partition,
 	}
 
 	if r.GroupID != "" {
 		k.GroupID = r.GroupID
+	}
+
+	if len(*r.Topics) > 0 {
+		k.GroupTopics = *r.Topics
+	} else {
+		k.Topic = r.Topic
 	}
 
 	kReader := kafka.NewReader(k)

@@ -4,6 +4,7 @@ import "time"
 
 type ReadMessage struct {
 	Topic     string
+	Topics    *[]string
 	GroupID   string
 	Value     string
 	Partition int
