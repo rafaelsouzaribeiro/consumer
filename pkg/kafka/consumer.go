@@ -19,7 +19,7 @@ func (c *Reader) Receive(r *pkg.ReadMessage, canal chan<- pkg.ReadMessage) {
 		k.GroupID = r.GroupID
 	}
 
-	if len(*r.Topics) > 0 {
+	if r.Topics != nil && len(*r.Topics) > 0 {
 		k.GroupTopics = *r.Topics
 	} else {
 		k.Topic = r.Topic
