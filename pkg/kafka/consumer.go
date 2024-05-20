@@ -17,6 +17,7 @@ func (c *Reader) Receive(r *pkg.ReadMessage, canal chan<- pkg.ReadMessage) {
 
 	if r.GroupID != "" {
 		k.GroupID = r.GroupID
+		k.StartOffset = kafka.LastOffset
 	}
 
 	if r.Topics != nil && len(*r.Topics) > 0 {
